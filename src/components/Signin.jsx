@@ -6,7 +6,7 @@ function Signin() {
     <div className="container mt-5">
       <div className="card">
         <div className="card-body">
-          <h3 className="card-title">Signin up</h3>
+          <h3 className="card-title">Signin</h3>
           <p className="card-text">
             Don't have an account?
             <Link to="/" className="card-link">
