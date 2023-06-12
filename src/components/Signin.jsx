@@ -1,7 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
+import { useState } from "react";
 
 function Signin() {
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const [error,setError] = useState('');
+  const navigate= useNavigate();
+  const { signIn } = UserAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('')
+    try {
+      await signIn(email,password)
+      navigate('/account')
+    }
+    catch (e) {
+      console.log(e.message);
+      setError(e.message)
+    }
+  }
+
   return (
     <div className="container mt-5">
       <div className="card">
@@ -9,12 +30,12 @@ function Signin() {
           <h3 className="card-title">Signin</h3>
           <p className="card-text">
             Don't have an account?
-            <Link to="/" className="card-link">
+            <Link to="/signup" className="card-link">
               Sign up.
             </Link>
           </p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email Address</label>
             <input
@@ -22,6 +43,7 @@ function Signin() {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              onChange={(e) => setEmail(e.target.value)}
             ></input>
           </div>
           <div className="form-group">
@@ -30,6 +52,7 @@ function Signin() {
               type="password"
               className="form-control"
               id="exampleInputPassword1"
+              onChange={(e) => setPassword(e.target.value)}
             ></input>
           </div>
           <button type="submit" className="btn btn-primary">
