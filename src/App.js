@@ -9,7 +9,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <div>
-      <h1>Firebase auth</h1>
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Signin />} />
