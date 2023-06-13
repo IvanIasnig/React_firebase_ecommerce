@@ -8,7 +8,7 @@ function Signin() {
   const [password,setPassword] = useState('');
   const [error,setError] = useState('');
   const navigate= useNavigate();
-  const { signIn } = UserAuth();
+  const { signIn, signInWithGoogle } = UserAuth(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,13 +23,24 @@ function Signin() {
     }
   }
 
+  const handleGoogleSignIn = async () => { 
+    try {
+      await signInWithGoogle()
+      navigate('/account')
+    }
+    catch (e) {
+      console.log(e.message);
+      setError(e.message)
+    }
+  }
+
   return (
     <div className="container mt-5">
       <div className="card">
         <div className="card-body">
-          <h3 className="card-title">Signin</h3>
+          <h3 className="card-title text-center">Login</h3>
           <p className="card-text">
-            Don't have an account?
+            Don't have an account? 
             <Link to="/signup" className="card-link">
               Sign up.
             </Link>
@@ -59,6 +70,9 @@ function Signin() {
             Sign In
           </button>
         </form>
+        <button onClick={handleGoogleSignIn} className="btn btn-danger mx-3 mb-3"> 
+          Login with Google
+        </button>
       </div>
     </div>
   );

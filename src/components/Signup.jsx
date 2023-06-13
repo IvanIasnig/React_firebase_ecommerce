@@ -36,7 +36,7 @@ function Signup() {
     <div className="container mt-5">
       <div className="card">
         <div className="card-body">
-          <h3 className="card-title">Signup</h3>
+          <h3 className="card-title text-center">Register</h3>
           <p className="card-text">
             Already have an account?
             <Link to="/" className="card-link">
@@ -70,8 +70,8 @@ function Signup() {
         </form>
         <button
           onClick={handleGoogleSignIn}
-          className="btn mt-3 btn-primary m-3">
-          Sign Up with Google
+          className="btn btn-danger m-3">
+          Register with Google
         </button>
       </div>
     </div>
