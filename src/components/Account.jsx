@@ -1,9 +1,10 @@
 import React from "react";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Products from "./Products";
 
 const Account = () => {
-  const { user, logout} = UserAuth();
+  const { user, logout } = UserAuth();
 
   const navigate = useNavigate();
 
@@ -23,10 +24,12 @@ const Account = () => {
       <div className="card">
         <div className="card-body">
           <h1 className="card-title">Account</h1>
-          <p className="card-text">User email:{user && user.email }</p>
+          <p className="card-text">User email: {user && user.email }</p>
           <button onClick={handleLogout} className="btn btn-primary">Logout</button>
+          
         </div>
       </div>
+      <Products />
     </div>
   );
 }

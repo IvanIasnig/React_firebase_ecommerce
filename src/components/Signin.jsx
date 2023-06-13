@@ -35,7 +35,7 @@ function Signin() {
             </Link>
           </p>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className="ms-3" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email Address</label>
             <input
@@ -46,7 +46,7 @@ function Signin() {
               onChange={(e) => setEmail(e.target.value)}
             ></input>
           </div>
-          <div className="form-group">
+          <div className="form-group mt-1">
             <label htmlFor="exampleInputPassword1">Password</label>
             <input
               type="password"
@@ -55,7 +55,7 @@ function Signin() {
               onChange={(e) => setPassword(e.target.value)}
             ></input>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary my-2">
             Sign In
           </button>
         </form>
