@@ -3,7 +3,6 @@ import {
   collection,
   getDocs,
   addDoc,
-  updateDoc,
   doc,
   setDoc,
 } from "firebase/firestore";
@@ -19,6 +18,12 @@ const Admin = () => {
     prezzo: "",
   });
   const [editingProduct, setEditingProduct] = useState(null);
+  const [updatedProduct, setUpdatedProduct] = useState({
+    title: "",
+    description: "",
+    url: "",
+    prezzo: "",
+  });
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -57,11 +62,18 @@ const Admin = () => {
 
   const startEditingProduct = (product) => {
     setEditingProduct(product);
+    setUpdatedProduct(product); // Initialize updatedProduct with the current product details
   };
 
   const submitProductEdits = async () => {
-    await updateProduct(editingProduct.id, editingProduct);
+    await updateProduct(editingProduct.id, updatedProduct);
     setEditingProduct(null);
+    setUpdatedProduct({
+      title: "",
+      description: "",
+      url: "",
+      prezzo: "",
+    });
   };
 
   return (
