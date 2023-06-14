@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/Cartcontext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -32,6 +33,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <Admin />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </CartProvider>
       </AuthContextProvider>
@@ -40,4 +49,3 @@ function App() {
 }
 
 export default App;
-

@@ -4,35 +4,41 @@ import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 
 function Signin() {
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
-  const [error,setError] = useState('');
-  const navigate= useNavigate();
-  const { signIn, signInWithGoogle } = UserAuth(); 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { signIn, signInWithGoogle } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('')
+    setError("");
     try {
-      await signIn(email,password)
-      navigate('/account')
-    }
-    catch (e) {
+      const user = await signIn(email, password);
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/account");
+      }
+    } catch (e) {
       console.log(e.message);
-      setError(e.message)
+      setError(e.message);
     }
-  }
+  };
 
-  const handleGoogleSignIn = async () => { 
+  const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle()
-      navigate('/account')
-    }
-    catch (e) {
+      const user = await signInWithGoogle();
+      if (user.role === "admin") {
+        navigate("/admin"); 
+      } else {
+        navigate("/account"); 
+      }
+    } catch (e) {
       console.log(e.message);
-      setError(e.message)
+      setError(e.message);
     }
-  }
+  };
 
   return (
     <div className="container mt-5">
@@ -40,7 +46,7 @@ function Signin() {
         <div className="card-body">
           <h3 className="card-title text-center">Login</h3>
           <p className="card-text">
-            Don't have an account? 
+            Don't have an account?
             <Link to="/signup" className="card-link">
               Sign up.
             </Link>
@@ -70,7 +76,10 @@ function Signin() {
             Sign In
           </button>
         </form>
-        <button onClick={handleGoogleSignIn} className="btn btn-danger mx-3 mb-3"> 
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn btn-danger mx-3 mb-3"
+        >
           Login with Google
         </button>
       </div>
