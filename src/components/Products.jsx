@@ -3,7 +3,6 @@ import { collection, getDocs } from 'firebase/firestore';
 import { firestore as db } from "../firebase";
 import { BsCartPlusFill } from 'react-icons/bs';
 import { CartContext } from '../context/Cartcontext';
-import { Link } from 'react-router-dom';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -39,7 +38,6 @@ const Products = () => {
           </div>
         ))}
       </div>
-      <Link to="/cart">Vai al carrello</Link>
     </div>
   );
 }

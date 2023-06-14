@@ -2,7 +2,6 @@ import React from "react";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Account from "./components/Account";
-import Products from "./components/Products";
 import Cart from "./components/CartPage";
 import { Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
@@ -17,8 +16,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/account"
               element={
