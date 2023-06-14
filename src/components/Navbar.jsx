@@ -17,11 +17,11 @@ function Navbar() {
     }
   };
   return (
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
-      <div class="container-fluid">
-        <span class="navbar-brand">Account</span>
+    <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
+      <div className="container-fluid">
+        <span className="navbar-brand">Account</span>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarText"
@@ -29,14 +29,14 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
               <p className="nav-link">{user && user.email}</p>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <button
                 className="btn btn-outline-primary my-2 my-sm-0"
                 onClick={handleLogout}
