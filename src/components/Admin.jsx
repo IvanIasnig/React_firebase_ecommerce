@@ -4,115 +4,150 @@ import {
   getDocs,
   addDoc,
   doc,
-  setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { firestore as db } from "../firebase";
 import Navbar from "./Navbar";
 
 const Admin = () => {
   const [products, setProducts] = useState([]);
+  const [reload, setReload] = useState(false);
   const [newProduct, setNewProduct] = useState({
-    title: "",
+    name: "",
     description: "",
-    url: "",
-    prezzo: "",
+    image: "",
+    price: "",
   });
   const [editingProduct, setEditingProduct] = useState(null);
   const [updatedProduct, setUpdatedProduct] = useState({
-    title: "",
+    name: "",
     description: "",
-    url: "",
-    prezzo: "",
+    image: "",
+    price: "",
   });
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsCollection = collection(db, "db", "oggetti", "vendibili");
+      const productsCollection = collection(db, "oggetti");
       const database = await getDocs(productsCollection);
-      setProducts(database.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      setProducts(database.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     fetchProducts();
-  }, []);
+  }, [reload]);
 
   const addProduct = async () => {
-    const productsCollection = collection(db, "db", "oggetti", "vendibili");
+    const productsCollection = collection(db, "oggetti");
     await addDoc(productsCollection, newProduct);
     setNewProduct({
-      title: "",
+      name: "",
       description: "",
-      url: "",
-      prezzo: "",
+      image: "",
+      price: "",
     });
+    setReload(!reload);
   };
 
   const updateProduct = async (id, updatedProduct) => {
-    if (typeof id !== "string") {
-      console.error("id is not a string:", id);
-      return;
-    }
-
-    if (typeof updatedProduct !== "object" || updatedProduct === null) {
-      console.error("updatedProduct is not an object:", updatedProduct);
-      return;
-    }
-
-    const productRef = doc(db, "db", "oggetti", "vendibili", id);
-    await setDoc(productRef, updatedProduct, { merge: true });
+    const productRef = doc(db, "oggetti", id);
+    await updateDoc(productRef, updatedProduct);
+    setReload(!reload);
   };
 
   const startEditingProduct = (product) => {
     setEditingProduct(product);
-    setUpdatedProduct(product); // Initialize updatedProduct with the current product details
+    setUpdatedProduct(product);
   };
 
   const submitProductEdits = async () => {
     await updateProduct(editingProduct.id, updatedProduct);
     setEditingProduct(null);
     setUpdatedProduct({
-      title: "",
+      name: "",
       description: "",
-      url: "",
-      prezzo: "",
+      image: "",
+      price: "",
     });
   };
 
   return (
     <>
       <Navbar />
-      <div className="container">
+      <div className="container mt-5">
         <div className="row justify-content-center">
           {products.map((product) => (
             <div key={product.id} className="col-md-3 mb-4">
-              <div className="card h-100 mx-auto">
+              <div className="card h-100">
                 <img
-                  src={product.url}
+                  src={product.image}
                   className="card-img-top"
-                  alt={product.title}
+                  alt={product.name}
                 />
                 <div className="card-body">
-                  <h2 className="card-title">{product.title}</h2>
+                  <h5 className="card-title">{product.name}</h5>
+                  <p className="card-text">{product.description}</p>
                   <p className="card-text">
-                    <b>Description:</b> {product.description}
+                    <small className="text-muted">{product.price} €</small>
                   </p>
-                  <p>{product.prezzo} €</p>
                   {editingProduct && editingProduct.id === product.id ? (
                     <>
-                      <button onClick={submitProductEdits}>
+                      <button
+                        className="btn btn-primary mb-2"
+                        onClick={submitProductEdits}
+                      >
                         Applica Modifiche
                       </button>
-                      <input
-                        value={editingProduct.title}
-                        onChange={(e) =>
-                          setEditingProduct({
-                            ...editingProduct,
-                            title: e.target.value,
-                          })
-                        }
-                      />
-                      {/* Devo ancora aggiungere gli input per gli altri campi */}
+                      <div className="form-group">
+                        <input
+                          className="form-control"
+                          value={updatedProduct.name}
+                          onChange={(e) =>
+                            setUpdatedProduct({
+                              ...updatedProduct,
+                              name: e.target.value,
+                            })
+                          }
+                          placeholder="Titolo"
+                        />
+                        <input
+                          className="form-control"
+                          value={updatedProduct.description}
+                          onChange={(e) =>
+                            setUpdatedProduct({
+                              ...updatedProduct,
+                              description: e.target.value,
+                            })
+                          }
+                          placeholder="Descrizione"
+                        />
+                        <input
+                          className="form-control"
+                          value={updatedProduct.image}
+                          onChange={(e) =>
+                            setUpdatedProduct({
+                              ...updatedProduct,
+                              image: e.target.value,
+                            })
+                          }
+                          placeholder="URL Immagine"
+                        />
+                        <input
+                          className="form-control"
+                          value={updatedProduct.price}
+                          onChange={(e) =>
+                            setUpdatedProduct({
+                              ...updatedProduct,
+                              price: e.target.value,
+                            })
+                          }
+                          placeholder="Prezzo"
+                        />
+                      </div>
                     </>
                   ) : (
-                    <button onClick={() => startEditingProduct(product)}>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => startEditingProduct(product)}
+                    >
                       Modifica
                     </button>
                   )}
@@ -121,47 +156,55 @@ const Admin = () => {
             </div>
           ))}
           <div className="col-md-3 mb-4">
-            <div className="card h-100 mx-auto">
+            <div className="card h-100">
               <div className="card-body">
-                <h2 className="card-title">Aggiungi Prodotto</h2>
+                <h5 className="card-title">Aggiungi Prodotto</h5>
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
                     addProduct();
                   }}
                 >
-                  <input
-                    value={newProduct.title}
-                    onChange={(e) =>
-                      setNewProduct({ ...newProduct, title: e.target.value })
-                    }
-                    placeholder="Titolo"
-                  />
-                  <input
-                    value={newProduct.description}
-                    onChange={(e) =>
-                      setNewProduct({
-                        ...newProduct,
-                        description: e.target.value,
-                      })
-                    }
-                    placeholder="Descrizione"
-                  />
-                  <input
-                    value={newProduct.url}
-                    onChange={(e) =>
-                      setNewProduct({ ...newProduct, url: e.target.value })
-                    }
-                    placeholder="URL Immagine"
-                  />
-                  <input
-                    value={newProduct.prezzo}
-                    onChange={(e) =>
-                      setNewProduct({ ...newProduct, prezzo: e.target.value })
-                    }
-                    placeholder="Prezzo"
-                  />
-                  <button type="submit">Aggiungi</button>
+                  <div className="form-group">
+                    <input
+                      className="form-control my-1"
+                      value={newProduct.name}
+                      onChange={(e) =>
+                        setNewProduct({ ...newProduct, name: e.target.value })
+                      }
+                      placeholder="Titolo"
+                    />
+                    <input
+                      className="form-control my-1"
+                      value={newProduct.description}
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          description: e.target.value,
+                        })
+                      }
+                      placeholder="Descrizione"
+                    />
+                    <input
+                      className="form-control my-1"
+                      value={newProduct.image}
+                      onChange={(e) =>
+                        setNewProduct({ ...newProduct, image: e.target.value })
+                      }
+                      placeholder="URL Immagine"
+                    />
+                    <input
+                      className="form-control my-1"
+                      value={newProduct.price}
+                      onChange={(e) =>
+                        setNewProduct({ ...newProduct, price: e.target.value })
+                      }
+                      placeholder="Prezzo"
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Aggiungi
+                  </button>
                 </form>
               </div>
             </div>

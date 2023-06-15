@@ -10,7 +10,7 @@ const Products = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsCollection = collection(db, 'db', 'oggetti', 'vendibili');
+      const productsCollection = collection(db, 'oggetti',);
       const database = await getDocs(productsCollection);
       setProducts(database.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     };
@@ -23,11 +23,11 @@ const Products = () => {
         {products.map(product => (
           <div key={product.id} className="col-md-3 mb-4">
             <div className="card h-100 mx-auto">
-              <img src={product.url} className="card-img-top" alt={product.title} />
+              <img src={product.image} className="card-img-top" alt={product.title} />
               <div className="card-body">
                 <h2 className="card-title">{product.title}</h2>
                 <p className="card-text"><b>Description:</b> {product.description}</p>
-                <p>{product.prezzo} €</p>
+                <p>{product.price} €</p>
               </div>
               <div className="card-footer">
                 <button className="btn btn-primary" onClick={() => addToCart(product)}>

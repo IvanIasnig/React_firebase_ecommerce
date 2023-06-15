@@ -8,7 +8,7 @@ const Cart = () => {
   const { cart, removeFromCart } = useContext(CartContext);
 
   const calculateTotal = () => {
-    return cart.reduce((acc, item) => acc + item.prezzo * item.quantity, 0);
+    return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
 
   return (
@@ -21,14 +21,14 @@ const Cart = () => {
             <div key={item.id} className="card mb-3">
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src={item.url} alt={item.title} className="img-fluid" />
+                  <img src={item.image} alt={item.name} className="img-fluid" />
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
-                    <h5 className="card-title">{item.title}</h5>
+                    <h5 className="card-title">{item.name}</h5>
                     <p className="card-text">{item.description}</p>
                     <p className="card-text">
-                      <small className="text-muted">{item.prezzo} €</small>
+                      <small className="text-muted">{item.price} €</small>
                     </p>
                     <p className="card-text">Quantità: {item.quantity}</p>
                     <button
