@@ -17,7 +17,7 @@ const Cart = () => {
     <Bg></Bg>
       <Navbar />
       <div className="container mt-5">
-        <h1>Il tuo Carrello</h1>
+        <h1 className="text-white mb-3">Il tuo Carrello</h1>
         {cart.length > 0 ? (
           cart.map((item) => (
             <div key={item.id} className="card mb-3">
@@ -28,7 +28,6 @@ const Cart = () => {
                 <div className="col-md-8">
                   <div className="card-body">
                     <h5 className="card-title">{item.name}</h5>
-                    <p className="card-text">{item.description}</p>
                     <p className="card-text">
                       <small className="text-muted">{item.price} €</small>
                     </p>
@@ -55,7 +54,7 @@ const Cart = () => {
         )}
         {cart.length > 0 && (
           <div className="d-flex justify-content-end">
-            <h4>Totale: {calculateTotal()} €</h4>
+            <h4 className="text-white">Totale: {calculateTotal()} €</h4>
           </div>
         )}
       </div>

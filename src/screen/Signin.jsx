@@ -42,9 +42,9 @@ function Signin() {
 
   return (
     <>
-    <Bg></Bg>
+      <Bg></Bg>
       <div className="container">
-        <div className="card ">
+        <div className="card pe-3">
           <div className="card-body ">
             <h3 className="card-title text-center">Login</h3>
             <p className="card-text">
@@ -74,16 +74,16 @@ function Signin() {
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
-            <button type="submit" className="btn btn-primary my-2">
+            <button type="submit" className="btn btn-primary my-2 w-100">
               Sign In
             </button>
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn btn-danger  mb-3 w-100"
+            >
+              Login with Google
+            </button>
           </form>
-          <button
-            onClick={handleGoogleSignIn}
-            className="btn btn-danger mx-3 mb-3"
-          >
-            Login with Google
-          </button>
         </div>
       </div>
     </>

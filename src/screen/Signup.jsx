@@ -35,7 +35,7 @@ function Signup() {
 
   return (
     <>
-    <Bg></Bg>
+      <Bg></Bg>
       <div className="container">
         <div className="card">
           <div className="card-body">
@@ -70,10 +70,10 @@ function Signup() {
             <button type="submit" className="btn btn-primary ms-3">
               Sign Up
             </button>
+            <button onClick={handleGoogleSignIn} className="btn btn-danger m-3">
+              Register with Google
+            </button>
           </form>
-          <button onClick={handleGoogleSignIn} className="btn btn-danger m-3">
-            Register with Google
-          </button>
         </div>
       </div>
     </>
