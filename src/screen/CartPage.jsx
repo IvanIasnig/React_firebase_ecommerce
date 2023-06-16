@@ -3,6 +3,7 @@ import { CartContext } from "../context/Cartcontext";
 import { BsTrashFill } from "react-icons/bs";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import Bg from "../components/Bg";
 
 const Cart = () => {
   const { cart, removeFromCart } = useContext(CartContext);
@@ -13,6 +14,7 @@ const Cart = () => {
 
   return (
     <>
+    <Bg></Bg>
       <Navbar />
       <div className="container mt-5">
         <h1>Il tuo Carrello</h1>

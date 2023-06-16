@@ -8,15 +8,18 @@ import {
 } from "firebase/firestore";
 import { firestore as db } from "../firebase";
 import Navbar from "../components/Navbar";
+import Bg from "../components/Bg";
 
 const Admin = () => {
   const [products, setProducts] = useState([]);
   const [reload, setReload] = useState(false);
+
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
     image: "",
     price: "",
+    category: "",
   });
   const [editingProduct, setEditingProduct] = useState(null);
   const [updatedProduct, setUpdatedProduct] = useState({
@@ -24,6 +27,7 @@ const Admin = () => {
     description: "",
     image: "",
     price: "",
+    category: "",
   });
 
   useEffect(() => {
@@ -43,6 +47,7 @@ const Admin = () => {
       description: "",
       image: "",
       price: "",
+      category: "",
     });
     setReload(!reload);
   };
@@ -66,11 +71,13 @@ const Admin = () => {
       description: "",
       image: "",
       price: "",
+      category: "",
     });
   };
 
   return (
     <>
+    <Bg></Bg>
       <Navbar />
       <div className="container mt-5">
         <div className="row justify-content-center">
@@ -183,7 +190,7 @@ const Admin = () => {
                           description: e.target.value,
                         })
                       }
-                      placeholder="Descrizione"
+                      placeholder="Description"
                     />
                     <input
                       className="form-control my-1"
@@ -191,7 +198,7 @@ const Admin = () => {
                       onChange={(e) =>
                         setNewProduct({ ...newProduct, image: e.target.value })
                       }
-                      placeholder="URL Immagine"
+                      placeholder="URL"
                     />
                     <input
                       className="form-control my-1"
@@ -199,11 +206,19 @@ const Admin = () => {
                       onChange={(e) =>
                         setNewProduct({ ...newProduct, price: e.target.value })
                       }
-                      placeholder="Prezzo"
+                      placeholder="Price"
+                    />
+                    <input
+                      className="form-control my-1"
+                      value={newProduct.category}
+                      onChange={(e) =>
+                        setNewProduct({ ...newProduct, category: e.target.value })
+                      }
+                      placeholder="Category"
                     />
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    Aggiungi
+                    Add product
                   </button>
                 </form>
               </div>
