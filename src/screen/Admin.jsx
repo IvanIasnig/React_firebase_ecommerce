@@ -9,6 +9,7 @@ import {
 import { firestore as db } from "../firebase";
 import Navbar from "../components/Navbar";
 import Bg from "../components/Bg";
+import { deleteDoc } from "firebase/firestore";
 
 const Admin = () => {
   const [products, setProducts] = useState([]);
@@ -20,6 +21,7 @@ const Admin = () => {
     image: "",
     price: "",
     category: "",
+    brand: "",
   });
   const [editingProduct, setEditingProduct] = useState(null);
   const [updatedProduct, setUpdatedProduct] = useState({
@@ -28,6 +30,7 @@ const Admin = () => {
     image: "",
     price: "",
     category: "",
+    brand: "",
   });
 
   useEffect(() => {
@@ -48,6 +51,7 @@ const Admin = () => {
       image: "",
       price: "",
       category: "",
+      brand: "",
     });
     setReload(!reload);
   };
@@ -72,12 +76,19 @@ const Admin = () => {
       image: "",
       price: "",
       category: "",
+      brand: "",
     });
+  };
+
+  const deleteProduct = async (id) => {
+    const productRef = doc(db, "oggetti", id);
+    await deleteDoc(productRef);
+    setReload(!reload);
   };
 
   return (
     <>
-    <Bg></Bg>
+      <Bg></Bg>
       <Navbar />
       <div className="container mt-5">
         <div className="row justify-content-center">
@@ -95,6 +106,8 @@ const Admin = () => {
                   <p className="card-text">
                     <small className="text-muted">{product.price} €</small>
                   </p>
+                  <p className="card-text">{product.category}</p>
+                  <p className="card-text">{product.brand}</p>
                   {editingProduct && editingProduct.id === product.id ? (
                     <>
                       <button
@@ -148,15 +161,34 @@ const Admin = () => {
                           }
                           placeholder="Prezzo"
                         />
+                        <input
+                          className="form-control"
+                          value={updatedProduct.category}
+                          onChange={(e) =>
+                            setUpdatedProduct({
+                              ...updatedProduct,
+                              category: e.target.value,
+                            })
+                          }
+                          placeholder="Category"
+                        />
                       </div>
                     </>
                   ) : (
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => startEditingProduct(product)}
-                    >
-                      Modifica
-                    </button>
+                    <>
+                      <button
+                        className="btn btn-success m-1"
+                        onClick={() => startEditingProduct(product)}
+                      >
+                        Modify
+                      </button>
+                      <button
+                        className="btn btn-danger m-1"
+                        onClick={() => deleteProduct(product.id)}
+                      >
+                        Delete
+                      </button>
+                    </>
                   )}
                 </div>
               </div>
@@ -165,7 +197,7 @@ const Admin = () => {
           <div className="col-md-3 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Aggiungi Prodotto</h5>
+                <h5 className="card-title">Add product</h5>
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -179,7 +211,7 @@ const Admin = () => {
                       onChange={(e) =>
                         setNewProduct({ ...newProduct, name: e.target.value })
                       }
-                      placeholder="Titolo"
+                      placeholder="Title"
                     />
                     <input
                       className="form-control my-1"
@@ -212,9 +244,23 @@ const Admin = () => {
                       className="form-control my-1"
                       value={newProduct.category}
                       onChange={(e) =>
-                        setNewProduct({ ...newProduct, category: e.target.value })
+                        setNewProduct({
+                          ...newProduct,
+                          category: e.target.value,
+                        })
                       }
                       placeholder="Category"
+                    />
+                    <input
+                      className="form-control my-1"
+                      value={newProduct.brand}
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          brand: e.target.value,
+                        })
+                      }
+                      placeholder="Brand"
                     />
                   </div>
                   <button type="submit" className="btn btn-primary">
