@@ -1,6 +1,6 @@
 import React from "react";
-import Products from "./Products";
-import Navbar from "./Navbar";
+import Products from "../components/Products";
+import Navbar from "../components/Navbar";
 
 const Account = () => {
 

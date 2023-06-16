@@ -7,7 +7,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { firestore as db } from "../firebase";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 const Admin = () => {
   const [products, setProducts] = useState([]);

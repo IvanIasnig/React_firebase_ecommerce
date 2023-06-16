@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/Cartcontext";
 import { BsTrashFill } from "react-icons/bs";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 
 const Cart = () => {

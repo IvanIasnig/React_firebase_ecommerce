@@ -1,13 +1,13 @@
 import React from "react";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
-import Account from "./components/Account";
-import Cart from "./components/CartPage";
+import Signin from "./screen/Signin";
+import Signup from "./screen/Signup";
+import Account from "./screen/Account";
+import Cart from "./screen/CartPage";
 import { Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/Cartcontext";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Admin from "./components/Admin";
+import ProtectedRoute from "./error/ProtectedRoute";
+import Admin from "./screen/Admin";
 
 function App() {
   return (
