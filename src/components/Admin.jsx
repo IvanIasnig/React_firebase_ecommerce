@@ -216,3 +216,5 @@ const Admin = () => {
 };
 
 export default Admin;
+
+//aggiungere categoria, aggiungere pagina di dettaglio (useParams)

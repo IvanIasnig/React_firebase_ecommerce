@@ -12,7 +12,6 @@ function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     try {
       const user = await signIn(email, password);
       if (user.role === "admin") {
