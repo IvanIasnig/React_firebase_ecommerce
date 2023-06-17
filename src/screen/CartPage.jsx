@@ -4,7 +4,8 @@ import { BsTrashFill } from "react-icons/bs";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import Bg from "../components/Bg";
-import '../css/products.css'
+import { BsCartCheck } from 'react-icons/bs'
+import "../css/products.css";
 
 const Cart = () => {
   const { cart, removeFromCart } = useContext(CartContext);
@@ -15,9 +16,19 @@ const Cart = () => {
 
   return (
     <>
-    <Bg></Bg>
+      <Bg></Bg>
       <Navbar />
       <div className="container mt-5">
+        <Link to="/checkout">
+          <button className="btn btn-success mb-3"> <BsCartCheck className="me-2 mb-1"/>Check Out</button>
+        </Link>
+        {cart.length > 0 && (
+          <div className="d-flex ">
+            <h4 className="text-white">
+              Totale: {Math.floor(calculateTotal())} €
+            </h4>
+          </div>
+        )}
         <h1 className="text-white mb-3">Il tuo Carrello</h1>
         {cart.length > 0 ? (
           cart.map((item) => (
@@ -51,11 +62,6 @@ const Cart = () => {
               <Link to="/account">pagina dei prodotti</Link> per aggiungere
               articoli.
             </p>
-          </div>
-        )}
-        {cart.length > 0 && (
-          <div className="d-flex justify-content-end">
-            <h4 className="text-white">Totale: {calculateTotal()} €</h4>
           </div>
         )}
       </div>

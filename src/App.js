@@ -9,6 +9,7 @@ import { CartProvider } from "./context/Cartcontext";
 import ProtectedRoute from "./error/ProtectedRoute";
 import Admin from "./screen/Admin";
 import Details from "./screen/Details";
+import CheckOut from "./screen/CheckOut";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Details />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute>
+                  <CheckOut />
                 </ProtectedRoute>
               }
             />

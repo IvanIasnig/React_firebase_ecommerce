@@ -20,9 +20,9 @@ function Navbar() {
 
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
+    <nav className="navbar navbar-dark bg-dark mb-5 ">
       <div className="container-fluid justify-content-lg-between">
-        <span className="navbar-brand">Account</span>
+        <span className="navbar-brand">BsKeyboard</span>
         <button
           className="navbar-toggler"
           type="button"
@@ -46,7 +46,7 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <button
-                className="btn btn-outline-primary my-2"
+                className="btn btn-outline-danger my-2"
                 onClick={handleLogout}
               >
                 Logout
