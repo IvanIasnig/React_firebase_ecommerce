@@ -20,11 +20,11 @@ function Bg() {
   }
 
   return (
-    <div>
+    <>
       <video autoPlay loop muted className="bgVideo">
         <source src={videoPath} type="video/mp4"></source>
       </video>
-    </div>
+    </>
   );
 }
 

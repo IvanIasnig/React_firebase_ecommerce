@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("All");
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
@@ -18,16 +20,40 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  const truncateDescription = (desc, charLimit) => {
-    return desc.length > charLimit
-      ? `${desc.substring(0, charLimit)}...`
-      : desc;
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   };
+
+  const handleFilter = (event) => {
+    setFilterCategory(event.target.value);
+  };
+
+  const filteredProducts = products.filter((product) => {
+    return (
+      (filterCategory === "All" || product.category === filterCategory) &&
+      (product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  });
 
   return (
     <div className="container">
       <div className="row justify-content-center">
-        {products.map((product) => (
+        <div className="col-12 mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search products"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <select className="form-select mt-2" value={filterCategory} onChange={handleFilter}>
+            <option value="All">All products</option>
+            <option value="Mouse">Mouse</option>
+            <option value="Keyboard">Keyboards</option>
+            <option value="Headphones">Headphones</option>
+          </select>
+        </div>
+        {filteredProducts.map((product) => (
           <div key={product.id} className="col-md-3 mb-4">
             <div className="card h-100 mx-auto">
               <img
@@ -37,21 +63,18 @@ const Products = () => {
               />
               <div className="card-body">
                 <h2 className="card-title">{product.name}</h2>
-                <p className="card-text">
-                  <b>Description:</b>{" "}
-                  {truncateDescription(product.description, 120)}
-                </p>
+
                 <p>{product.price} €</p>
               </div>
               <div className="card-footer">
                 <button
-                  className="btn btn-primary"
+                  className="my-btn w-100"
                   onClick={() => addToCart(product)}
                 >
                   <BsCartPlusFill /> Aggiungi al carrello
                 </button>
                 <Link to={`/account/details/${product.id}`}>
-                  <button className="btn btn-success mt-1 w-100">
+                  <button className="my-btn det-btn mt-1 w-100">
                     Details
                   </button>
                 </Link>

@@ -1,0 +1,134 @@
+.product-details {
+    background-color: #222;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .product-image img {
+    border-radius: 15px;
+  }
+  
+  .product-info {
+    padding: 15px 0;
+  }
+  
+  .product-name {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  
+  .product-price {
+    font-size: 1.2em;
+    color: #f8b500;
+  }
+  
+  .back-button {
+    margin-top: 20px;
+  }
+  
+  /* Stili generali */
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    margin-top: 50px;
+  }
+  
+  /* Stili per i prodotti */
+  .card {
+    border: none;
+    transition: transform 0.2s;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    color: #6c757d;
+  }
+  
+  .card-footer {
+    background: none;
+    border: none;
+    text-align: center;
+  }
+  
+  /* Stili per i bottoni */
+  .my-btn {
+    color: #fff;
+    background-color: #000f63; /* Cambiato in Tomato */
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 6px #999;
+  }
+  
+  .det-btn {
+    color: #fff;
+    background-color: #3a0061; /* Cambiato in Tomato */
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 6px #999;
+  }
+  
+  .my-btn:hover {
+    background-color: #b9ffff; /* Green */
+    color: #000000;
+  }
+  
+  .my-btn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  
+  /* Stili per i bottoni */
+  button:focus {
+    outline: none;
+  }
+  
+  button:active {
+    transform: translateY(3px);
+  }

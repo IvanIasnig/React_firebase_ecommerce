@@ -12,7 +12,7 @@ import Details from "./screen/Details";
 
 function App() {
   return (
-    <div>
+    <>
       <AuthContextProvider>
         <CartProvider>
           <Routes>
@@ -53,7 +53,7 @@ function App() {
           </Routes>
         </CartProvider>
       </AuthContextProvider>
-    </div>
+    </>
   );
 }
 

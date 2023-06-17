@@ -4,6 +4,7 @@ import { BsTrashFill } from "react-icons/bs";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import Bg from "../components/Bg";
+import '../css/products.css'
 
 const Cart = () => {
   const { cart, removeFromCart } = useContext(CartContext);
@@ -45,7 +46,7 @@ const Cart = () => {
           ))
         ) : (
           <div>
-            <p>
+            <p className="text-white">
               Il carrello è vuoto. Torna alla{" "}
               <Link to="/account">pagina dei prodotti</Link> per aggiungere
               articoli.
