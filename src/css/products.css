@@ -46,7 +46,7 @@
     transition: transform 0.2s;
     overflow: hidden;
     border-radius: 15px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 0px rgba(0, 0, 0, 0.15);
   }
   
   .card:hover {
@@ -83,7 +83,7 @@
   /* Stili per i bottoni */
   .my-btn {
     color: #fff;
-    background-color: #000f63; /* Cambiato in Tomato */
+    background-color: #000f63; 
     border: none;
     padding: 12px 20px;
     text-align: center;
@@ -99,7 +99,7 @@
   
   .det-btn {
     color: #fff;
-    background-color: #3a0061; /* Cambiato in Tomato */
+    background-color: #3a0061;
     border: none;
     padding: 12px 20px;
     text-align: center;
@@ -114,7 +114,7 @@
   }
   
   .my-btn:hover {
-    background-color: #b9ffff; /* Green */
+    background-color: #b9ffff;
     color: #000000;
   }
   

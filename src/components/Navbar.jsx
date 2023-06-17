@@ -1,13 +1,13 @@
 import React from "react";
 import { UserAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { BsCartPlusFill } from 'react-icons/bs';
+import { BsCartPlusFill } from "react-icons/bs";
 
 function Navbar() {
   const { user, logout } = UserAuth();
-  
+
   const navigate = useNavigate();
-  
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -17,7 +17,8 @@ function Navbar() {
       console.log(e.message);
     }
   };
-  
+
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
       <div className="container-fluid justify-content-lg-between">
@@ -59,7 +60,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-
-
