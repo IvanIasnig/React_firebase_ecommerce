@@ -36,7 +36,7 @@ function Signup() {
   return (
     <>
       <Bg></Bg>
-      <div className="container">
+      <div className="container pt-5" >
         <div className="card">
           <div className="card-body">
             <h3 className="card-title text-center">Register</h3>
