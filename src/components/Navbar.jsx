@@ -2,6 +2,7 @@ import React from "react";
 import { UserAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { BsCartPlusFill } from "react-icons/bs";
+import {AiOutlineHome} from "react-icons/ai"
 
 function Navbar() {
   const { user, logout } = UserAuth();
@@ -41,7 +42,12 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link to="/cart" className="nav-link">
-                <BsCartPlusFill /> Vai al carrello
+                <BsCartPlusFill className="mb-1"/> Cart
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/account" className="nav-link ">
+                <AiOutlineHome className="mb-1" /> Home
               </Link>
             </li>
             <li className="nav-item">

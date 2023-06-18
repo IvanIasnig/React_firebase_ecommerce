@@ -53,6 +53,11 @@ function Signin() {
                 Sign up.
               </Link>
             </p>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
           </div>
           <form className="ms-3" onSubmit={handleSubmit}>
             <div className="form-group">
