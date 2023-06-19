@@ -4,12 +4,13 @@ import { firestore as db } from "../firebase";
 import { BsCartPlusFill } from "react-icons/bs";
 import { CartContext } from "../context/Cartcontext";
 import { Link } from "react-router-dom";
+import Modal from "./Modal";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("All");
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, isModalOpen } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,8 +36,11 @@ const Products = () => {
     );
   });
 
+
+
   return (
     <div className="container">
+      <Modal></Modal>
       <div className="row justify-content-center">
         <div className="col-12 mb-3">
           <input

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
 export const CartContext = createContext();
 
@@ -15,6 +15,8 @@ export const CartProvider = ({ children }) => {
       newCart.push(product);
     }
     setCart(newCart);
+
+    openModal();
   };
 
   const removeFromCart = (id) => {
@@ -27,9 +29,22 @@ export const CartProvider = ({ children }) => {
     }
     setCart(newCart);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+
+  const closeModal = () => setIsModalOpen(false);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        closeModal,
+        isModalOpen,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
